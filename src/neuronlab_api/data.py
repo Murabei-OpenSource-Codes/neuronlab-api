@@ -4,6 +4,11 @@ import json
 import os
 import requests
 import time
+from neuronlab_api.exceptions import (
+    NeuronLabAPIException, NeuronLabInvalidDocumentException,
+    NeuronLabBadRequestException, NeuronLabUserNotFoundException,
+    NeuronLabInternalServerException,
+)
 from typing import List
 
 class NeuronLabAPI:
@@ -44,13 +49,33 @@ class NeuronLabAPI:
                 response = requests.get(url, headers=headers, params=payload)
                 response.raise_for_status()
                 response_json = response.json()
-                # if response.status_code == 200:
-                #     print()
-                # elif response.status_code == 400:
-                # elif response.status_code == 403:
-                # elif response.status_code == 500:
-                print(f"Code: {response.status_code}")
-                print(f"Result: {response_json}")
+                # print(f"Code: {response.status_code}")
+                if response.status_code == 200:
+                    response_data = response_json['responses']
+                    response_message = response_json['message']
+                    if 'error' in response_data:
+                        raise NeuronLabInvalidDocumentException(
+                            message=response_message,
+                            payload={'list_cnpj': list_cnpj}
+                            )
+                    return response_data
+                elif response.status_code == 400:
+                    raise NeuronLabBadRequestException(
+                        message=response_message,
+                        payload={'list_cnpj': list_cnpj}
+                    )
+                elif response.status_code == 403:
+                    raise NeuronLabUserNotFoundException(
+                        message=response_message,
+                        payload={'list_cnpj': list_cnpj}
+                    )
+                elif response.status_code == 500:
+                    raise NeuronLabInternalServerException(
+                        message=response_message,
+                        payload={'list_cnpj': list_cnpj}
+                    )
+
+                return response_data
 
             except Exception as e:
                 print(f"Erro na requisição: {e}")
