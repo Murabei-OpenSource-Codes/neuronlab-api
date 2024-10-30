@@ -1,9 +1,8 @@
 """NeuronLab Python API."""
 import requests
 from neuronlab_api.exceptions import (
-    NeuronLabAPIException, NeuronLabInvalidDocumentException,
-    NeuronLabBadRequestException, NeuronLabUserNotFoundException,
-    NeuronLabInternalServerException,
+    NeuronLabInvalidDocumentException, NeuronLabBadRequestException,
+    NeuronLabUserNotFoundException, NeuronLabInternalServerException,
 )
 
 class NeuronLabAPI:
