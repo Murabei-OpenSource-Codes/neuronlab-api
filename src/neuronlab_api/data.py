@@ -9,7 +9,6 @@ from neuronlab_api.exceptions import (
     NeuronLabBadRequestException, NeuronLabUserNotFoundException,
     NeuronLabInternalServerException,
 )
-from typing import List
 
 class NeuronLabAPI:
     def __init__(self, neuronlab_auth_token: str, user_id: str):
@@ -22,11 +21,11 @@ class NeuronLabAPI:
         self.neuronlab_auth_token = neuronlab_auth_token
         self.user_id = user_id
     
-    def get_cnpj_dataset(self, list_cnpj: List[str]) -> dict:
+    def get_cnpj_dataset(self, cnpj: str) -> dict:
         """Call Neuron Lab API to fetch dataset for a list of CNPJ.
 
         Args:
-            list_cnpj (List[str]): List of cnpjs to be fetched.
+            cnpj (str): Cnpj to be enriched.
         
         Returns:
             dict: Information available on Neuron Lab.
@@ -40,7 +39,7 @@ class NeuronLabAPI:
         }
 
         payload = {
-            "data": ",".join(list_cnpj),
+            "data": cnpj,
             "user_id": self.user_id,
         }
 
@@ -56,23 +55,23 @@ class NeuronLabAPI:
                     if 'error' in response_data:
                         raise NeuronLabInvalidDocumentException(
                             message=response_message,
-                            payload={'list_cnpj': list_cnpj}
+                            payload={'cnpj': cnpj}
                             )
                     return response_data
                 elif response.status_code == 400:
                     raise NeuronLabBadRequestException(
                         message=response_message,
-                        payload={'list_cnpj': list_cnpj}
+                        payload={'cnpj': cnpj}
                     )
                 elif response.status_code == 403:
                     raise NeuronLabUserNotFoundException(
                         message=response_message,
-                        payload={'list_cnpj': list_cnpj}
+                        payload={'cnpj': cnpj}
                     )
                 elif response.status_code == 500:
                     raise NeuronLabInternalServerException(
                         message=response_message,
-                        payload={'list_cnpj': list_cnpj}
+                        payload={'cnpj': cnpj}
                     )
 
                 return response_data
