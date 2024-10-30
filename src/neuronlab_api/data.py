@@ -1,9 +1,5 @@
 """NeuronLab Python API."""
-import datetime
-import json
-import os
 import requests
-import time
 from neuronlab_api.exceptions import (
     NeuronLabAPIException, NeuronLabInvalidDocumentException,
     NeuronLabBadRequestException, NeuronLabUserNotFoundException,
