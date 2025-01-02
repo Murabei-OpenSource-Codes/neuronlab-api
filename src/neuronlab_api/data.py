@@ -5,7 +5,9 @@ from neuronlab_api.exceptions import (
     NeuronLabUserNotFoundException, NeuronLabInternalServerException,
 )
 
+
 class NeuronLabAPI:
+    """."""
     def __init__(self, neuronlab_auth_token: str, user_id: str):
         """__init__.
 
@@ -15,16 +17,16 @@ class NeuronLabAPI:
         """
         self.neuronlab_auth_token = neuronlab_auth_token
         self.user_id = user_id
-    
+
     def get_cnpj_dataset(self, cnpj: str) -> dict:
         """Call Neuron Lab API to fetch dataset for a list of CNPJ.
 
         Args:
             cnpj (str): Cnpj to be enriched.
-        
+
         Returns:
             dict: Information available on Neuron Lab.
-        
+
         Raises:
         """
         url = "https://trial-plataform-server.braveocean-99c2da72.brazilsouth.azurecontainerapps.io/api/integration/company"
