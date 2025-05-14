@@ -1,6 +1,0 @@
-# Create a test_parameters.ini with the same keys as this file
-[DEFAULT]
-NEURONLAB_AUTH_TOKEN=api_token
-NEURONLAB_URL=api_url
-CNPJ_TEST_INPUT=comma_separated_cnpjs
-CPF_TEST_INPUT=comma_separated_cpfs

@@ -94,6 +94,12 @@ ipython_config.py
 #   install all needed dependencies.
 #Pipfile.lock
 
+# UV
+#   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+#uv.lock
+
 # poetry
 #   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
 #   This is especially recommended for binary packages to ensure reproducibility, and is more
@@ -161,5 +167,44 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# Ignore test input
+# Ruff stuff:
+.ruff_cache/
+
+# PyPI configuration file
+.pypirc
+
 **/test_parameters.ini
+
+#####################################
+# Não deixa subir as bases de dados #
+*.csv
+*.rds
+*.db
+*.tab
+*.xlsx
+*.xls
+*.Rhistory
+*.pyc
+.~lock.**
+*.RData
+*.RHistory
+*.pdf
+*.png
+*.pickle
+*.joblib
+*.pyc
+*.ipynb
+*.dat
+*.lp
+*.egg
+*.parquet
+*.zip
+*.json
+*.rda
+*.RDataTmp
+
+**.secrets
+*.ps
+*.dot
+.Rproj.user
+**.noseids

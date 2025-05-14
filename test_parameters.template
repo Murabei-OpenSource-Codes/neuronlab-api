@@ -1,0 +1,4 @@
+export NEURONLAB_AUTH_TOKEN=
+export NEURONLAB_URL=
+export CNPJ_TEST_INPUT=
+export CPF_TEST_INPUT=
