@@ -93,7 +93,7 @@ class NeuronLabAPI:
             NeuronLabAPIException
         """
 
-        if len(documents) == 1:
+        if len(documents) == 0:
             raise NeuronLabInvalidArgs(
                 message="Empty document list, at least one document expected")
 
