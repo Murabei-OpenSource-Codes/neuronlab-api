@@ -28,3 +28,19 @@ class TestNeuronLabAPI(unittest.TestCase):
 
         response = neuronlab_api.get_cpf_dataset(cpfs=CNPJ_TEST_INPUT)
         self.assertEqual(response["totalCPFs"], len(CNPJ_TEST_INPUT))
+
+    def test__fetch_one_cnpj_ok(self):
+        neuronlab_api = NeuronLabAPI(
+            neuronlab_auth_token=NEURONLAB_AUTH_TOKEN,
+            url=NEURONLAB_URL)
+
+        response = neuronlab_api.get_cnpj_dataset(cnpjs=CNPJ_TEST_INPUT[:1])
+        self.assertEqual(response["totalCNPJs"], len(1))
+
+    def test__fetch_one_cpf_ok(self):
+        neuronlab_api = NeuronLabAPI(
+            neuronlab_auth_token=NEURONLAB_AUTH_TOKEN,
+            url=NEURONLAB_URL)
+
+        response = neuronlab_api.get_cpf_dataset(cpfs=CNPJ_TEST_INPUT[:1])
+        self.assertEqual(response["totalCPFs"], len(1))
