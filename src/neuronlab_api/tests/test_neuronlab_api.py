@@ -69,7 +69,6 @@ class TestNeuronLabAPI(unittest.TestCase):
         self.assertEqual(pefin_summary.get("count"), 2)
 
     def test__fetch_one_cpf_with_score(self):
-        pass
         neuronlab_api = NeuronLabAPI(
             neuronlab_auth_token=NEURONLAB_AUTH_TOKEN,
             url=NEURONLAB_URL)
