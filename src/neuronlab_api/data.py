@@ -40,6 +40,17 @@ class NeuronLabAPI:
         self._session = requests.Session()
         self._session.mount(self._url, HTTPAdapter(max_retries=retry_strategy))
         self._session.proxies = {"http": self._proxy, "https": self._proxy}
+        self._fetch_score = False
+
+    def with_score(self):
+        """Setup next request to fetch credit data.
+
+        Returns:
+            self:
+                returns self, flagged for fetch credit data.
+        """
+        self._fetch_score = True
+        return self
 
     def get_cnpj_dataset(self, cnpjs: List[str]):
         """Call Neuron Lab API to fetch data for a list of CNPJ.
@@ -75,7 +86,8 @@ class NeuronLabAPI:
 
         return self._get_document_dataset("cpf", cpfs)
 
-    def _get_document_dataset(self, document_type: str, documents: List[str]) -> dict:
+    def _get_document_dataset(
+            self, document_type: str, documents: List[str]) -> dict:
         """Call Neuron Lab API to fetch dataset for a list of document data.
 
         Args:
@@ -102,6 +114,10 @@ class NeuronLabAPI:
         comma_separated_documents = ",".join(documents)
         payload = {}
         payload["{}s".format(document_type)] = comma_separated_documents
+
+        if self._fetch_score:
+            payload["useScore"] = "true"
+            self._fetch_score = False
 
         try:
             document_endpoint = "{}/api/{}/search-{}s".format(

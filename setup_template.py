@@ -34,7 +34,7 @@ requirements = parse_requirements(requirements_path)
 
 setup(
     name="neuronlab-api",
-    version="1.0",
+    version="2.0",
     install_requires=requirements,  # Uses parsed requirements.txt
     include_package_data=True,
     license="BSD-3-Clause License",
